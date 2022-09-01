@@ -1,0 +1,175 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	--pad: clamp(1rem, 2vw, 3rem);
+	--pad-lg: calc(var(--pad) * 2);
+	--pad-sm: calc(var(--pad) / 2);
+	--pad-xs: calc(var(--pad) / 4);
+	margin: 0;
+	font-family: "Brassia-Regular"; 
+	background-color:darkseagreen; 
+	min-height: 100vh;
+}
+
+header {
+    font-size: large;
+    color: honeydew;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+img {
+	width: 100%;
+	display: block;
+	aspect-ratio: 3 / 2;
+	object-fit: cover;
+}
+
+main,
+aside {
+	container: inline-size / layout;
+	padding: var(--pad);
+    position: sticky;
+}
+
+aside {
+	background-color: darkcyan;
+    --pad: clamp(1rem, 2vw, 3rem);
+}
+
+@media (min-width: 60em) {
+	body {
+		display: grid;
+		grid-template-columns: 1fr min(28rem, 50%);
+	}
+}
+
+p,
+h3 {
+	margin: 0;
+}
+
+.card__inner h3 {
+	margin: 0 0 var(--pad-xs);
+	font-size: 1.5rem;
+}
+
+.card__inner p {
+	margin: 0 0 var(--pad-sm);
+}
+
+.grid {
+	display: grid;
+	gap: var(--pad);
+	margin: 0 auto;
+	max-width: 65rem;
+	padding: var(--pad);
+}
+
+.grid__item-wrapper {
+	container: inline-size / component;
+}
+
+@media (min-width: 75em) {
+	.grid {
+		border: 0.2rem solid aliceblue;
+		padding: var(--pad);
+	}
+}
+
+.item {
+	background-color:slateblue;
+	width: 100%;
+	border-radius: var(--pad);
+	border: 0.4rem solid;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.card__inner,
+.card__top {
+	padding: var(--pad-sm);
+}
+
+.card__inner {
+	display: flex;
+	flex-direction: column;
+	flex: 1 0 auto;
+	background: white;
+}
+
+.card__top {
+	color: white;
+	font-weight: 700;
+}
+
+.card__inner > * + * {
+	margin-top: var(--pad-sm);
+}
+
+.card__inner a {
+	margin-top: auto;
+	color: inherit;
+	font-size: 0.9rem;
+}
+
+[style="--c: turquoise"] .card__top,
+[style="--c: orange"] .card__top {
+	color: black;
+}
+
+@container layout (inline-size > 40em) {
+	.grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	
+	.grid__item-wrapper:first-child {
+		grid-column: 1 / span 2;
+	}
+	
+	.item {
+		height: 100%;
+	}
+}
+
+
+@container component (inline-size > 20em) {
+	.card__inner h3 {
+		font-size: 1.8rem;
+	}
+}
+
+@container component (inline-size > 40em) {
+	.item {
+		position: relative;
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+	}
+	
+	.item img {
+		aspect-ratio: none;
+		height: 100%;
+	}
+	
+	.card__top {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: var(--c, deeppink);
+		z-index: 2;
+	}
+	
+	.card__inner {
+		flex: 1 1 auto;
+		padding: var(--pad);
+	}
+	
+	.card__inner h3 {
+		font-size: clamp(1.5rem, 2vw + 1rem, 3rem);
+	}
+}
